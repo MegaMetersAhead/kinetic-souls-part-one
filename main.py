@@ -8,7 +8,7 @@ import keyboard
 import vgamepad as vg
 from pykinect2 import PyKinectV2, PyKinectRuntime
 
-from kinect_detector import KinectDetector#, show_camera
+from kinect_detector import KinectDetector
 from show_kinect_data import show_camera
 
 
@@ -18,7 +18,6 @@ kinect = PyKinectRuntime.PyKinectRuntime(PyKinectV2.FrameSourceTypes_Color | PyK
 class KinectGamepadController:
     def __init__(self, fps=20, pause_key="p"):
         self.kinect_detector = KinectDetector()
-        # self.vgamepad_controller = VGamepadController()
         self.gamepad = vg.VX360Gamepad()
         self.fps = fps
         self.secondary_actions_wait = 0.5 / self.fps
@@ -159,79 +158,7 @@ class KinectGamepadController:
         print(f"\nUNPAUSED!\n")
 
 
-# def stolen_color_frame(kinect=kinect):
-#         """Get color frame from kinect without updating the last access timestamp"""
-#         if kinect._color_frame_data is None:
-#             return None
-#         else:
-#             return np.copy(np.ctypeslib.as_array(kinect._color_frame_data, shape=(kinect._color_frame_data_capacity.value,)))
-
-
-# def show_cam(resize_dim=(1280, 720), mirror=False):
-#     while True:
-#         # Get the current RGB video frame from the Kinect sensor
-#         if kinect.has_new_color_frame():
-#             frame = stolen_color_frame(kinect)
-#             if frame is None:
-#                 continue
-#             print(f"first frame type: {type(frame)}")
-#             frame = kinect.get_last_color_frame()
-#             print(f"second frame type: {type(frame)}")
-#             frame = frame.reshape((1080, 1920, 4))[:, ::, :3]
-#             if not mirror:
-#                 frame = frame[:, ::-1, :]  # Reverse rows of pixels to make in unmirrored
-#             if resize_dim is not None:
-#                 frame = cv2.resize(frame, resize_dim, interpolation=cv2.INTER_AREA)
-
-#             # Display the RGB video feed with cv2
-#             cv2.imshow('RGB', frame)
-#             if cv2.waitKey(1) & 0xFF == ord('q'):
-#                 break
-#         else:
-#             time.sleep(0.003)
-
-
-# def show_cam(resize_dim=(1280, 720), mirror=False):
-#     while True:
-#         # Get the current RGB video frame from the Kinect sensor
-#         if kinect.has_new_color_frame():
-#             frame = kinect.get_last_color_frame()
-#             print(f"first frame type: {type(frame)}")
-#             frame = kinect.get_last_color_frame()
-#             print(f"second frame type: {type(frame)}")
-#             frame = frame.reshape((1080, 1920, 4))[:, ::, :3]
-#             if not mirror:
-#                 frame = frame[:, ::-1, :]  # Reverse rows of pixels to make in unmirrored
-#             if resize_dim is not None:
-#                 frame = cv2.resize(frame, resize_dim, interpolation=cv2.INTER_AREA)
-
-#             # Display the RGB video feed with cv2
-#             cv2.imshow('RGB', frame)
-#             if cv2.waitKey(1) & 0xFF == ord('q'):
-#                 break
-#         else:
-#             time.sleep(0.003)
-
-
-# def testy1(fps=20):
-#     """Test the controller with the camera being displayed with cv2"""
-#     import threading
-#     cam_thread = threading.Thread(target=show_camera, kwargs={"mirror": False})
-#     cam_thread.start()
-#     controller = KinectGamepadController(fps=fps)
-#     controller.run()
-
-
-# def testy2(fps=20):
-#     """Test the controller with the camera and optionally the skeleton being displayed with pygame"""
-#     import threading
-#     cam_thread = threading.Thread(target=show_camera, args={}, kwargs={"single_skeleton_color": (120, 20, 120)})
-#     cam_thread.start()
-#     controller = KinectGamepadController(fps=fps)
-#     controller.run()
-
-
-def testy3(fps=20):
+def testy(fps=20):
     """Test the controller with the camera and optionally the skeleton being displayed with pygame"""
     import threading
     args = {}
@@ -239,7 +166,6 @@ def testy3(fps=20):
         "display_type": "pygame",
         "single_skeleton_color": (120, 20, 120),
         "window_size": (1280, 720),
-        # "window_size": (1024, 576),
         "show_fps": False,
     }
     cam_thread = threading.Thread(target=show_camera, args=args, kwargs=kwargs)
@@ -249,7 +175,7 @@ def testy3(fps=20):
 
 
 if __name__ == "__main__":
-    testy3(fps=25)
+    testy(fps=25)
 
 if __name__ == "__main__":
     print(f"\n\n    Finished Script '{os.path.basename(__file__)}' at {time.strftime('%Y-%m-%d_%H-%M-%S')}    \n\n")
