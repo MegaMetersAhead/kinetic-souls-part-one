@@ -1,0 +1,5 @@
+/venv
+./*.code-workspace
+./*.lnk
+_kinetic-souls-part-one.code-workspace
+/dev_mess

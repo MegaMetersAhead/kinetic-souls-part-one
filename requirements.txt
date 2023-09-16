@@ -1,0 +1,6 @@
+numpy==1.21.6
+pykinect2
+vgamepad
+opencv-python==4.7.0.72
+SpeechRecognition==3.9.0
+PyAudio==0.2.13
