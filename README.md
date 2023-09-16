@@ -1,5 +1,6 @@
 # Kinetic-Souls Part One
 Playing Dark Souls 3 with the Kinect V2 like you're the character in the game.
+<p>Watch the video about the journey here: https://youtu.be/AYUUGhctgag
 
 ## Quick Start Guide
 
